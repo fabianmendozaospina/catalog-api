@@ -1,0 +1,319 @@
+{
+	"info": {
+		"_postman_id": "1844d146-a830-41a3-af0b-e46775a3414c",
+		"name": "Catalogo-API",
+		"description": "Permite realizar operaciones CRUD sobre el Catálogo de Productos Médicos que suministra la Fundación Santa Fe.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16132451"
+	},
+	"item": [
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Iniciar sesión",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "correo@correo.com",
+									"description": "Requerido. Cadena de máximo 50 caracteres.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abc123",
+									"description": "Requerido. Cadena compuesta por letras, números y caracteres especiales.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/iniciar-sesion",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"iniciar-sesion"
+							]
+						},
+						"description": "Permite iniciar sesión en el sistema. Este endpoint generará el token de acceso JWT que puede ser usado en los diferentes endpoints de la entidad Productos. La carga útil de la solicitud utiliza el tipo de cuerpo x-www-form-urlencoded.\n\n**Códigos de estado de respuesta:**  \n200 - Token devuelto exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				},
+				{
+					"name": "Crear cuenta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "correo@correo.com",
+									"description": "Requerido. Cadena de máximo 50 caracteres.",
+									"type": "text"
+								},
+								{
+									"key": "nombre",
+									"value": "Maria Velez",
+									"description": "Requerido. Cadena de máximo 50 caracteres.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Abc123",
+									"description": "Requerido. Cadena compuesta por letras, números y caracteres especiales.",
+									"type": "text"
+								},
+								{
+									"key": "confirmar",
+									"value": "Abc123",
+									"description": "Requerido. Cadena compuesta por letras, números y caracteres especiales. No se almacena en la base de datos.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/crear-cuenta",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"crear-cuenta"
+							]
+						},
+						"description": "Permite crear una nueva cuenta de usuario. La carga útil de la solicitud utiliza el tipo de cuerpo de x-www-form-urlencoded.  \n  \n**Códigos de estado de respuesta:**  \n201 - Cuenta creada exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n404 - Recurso no encontrado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				}
+			],
+			"description": "Este conjunto de endpoints administra los diferentes usuarios del sistema, tanto para la creación de cuentas como para la autenticación."
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Crear producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvcnJlb0Bjb3JyZW8uY29tIiwibm9tYnJlIjoiRmFiaWFuIiwiaWQiOiI2NWUzOWQ4N2U0OTUyNDUzN2Q2ZjVjZmEiLCJpYXQiOjE3MDk1NjMwMDIsImV4cCI6MTcwOTU2NjYwMn0.D3N9CpM-MektIv2s6snAS1-Sk_bXoZByXPY5GXcfAs0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "Fonendoscopio OIS 500",
+									"description": "Requerido. Cadena de máximo 50 caracteres.",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "El Fonendoscopio OIS 500 cuenta con tubos auriculares fabricados en cobre y campana en aleación de zinc, incorpora una manguera en forma de “A”, garantizando así una optima conductividad del sonido.",
+									"description": "Requerido. Cadena de máximo 250 caracteres.",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "165000",
+									"description": "Requerido. Valor numérico entero. Rango permitido: 1 a 99999999.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"productos"
+							]
+						},
+						"description": "Permite crear un nuevo producto médico. Para hacer uso de este endpoint mediante código, deberás registrar el token de autenticación en el header _Authorization_ utilizando el tipo de autorización _Bearer_. Esto también lo puedes hacer mediante Postman desde la pestaña _Authorization_. La carga útil de la solicitud utiliza el tipo de cuerpo de x-www-form-urlencoded.\n\n**Códigos de estado de respuesta:**  \n201 - Producto creado exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar productos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvcnJlb0Bjb3JyZW8uY29tIiwibm9tYnJlIjoiRmFiaWFuIiwiaWQiOiI2NWUzOWQ4N2U0OTUyNDUzN2Q2ZjVjZmEiLCJpYXQiOjE3MDk1NjMwMDIsImV4cCI6MTcwOTU2NjYwMn0.D3N9CpM-MektIv2s6snAS1-Sk_bXoZByXPY5GXcfAs0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:5000/productos",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"productos"
+							]
+						},
+						"description": "Permite mostrar un arreglo de productos médicos. Si no hay productos devuelve un arreglo vacío. Para hacer uso de este endpoint mediante código, deberás registrar el token de autenticación en el header _Authorization_ utilizando el tipo de autorización _Bearer_. Esto también lo puedes hacer mediante Postman desde la pestaña _Authorization_. La carga útil de la solicitud utiliza el tipo de cuerpo de x-www-form-urlencoded.\n\n**Códigos de estado de respuesta:**  \n200 - Datos devueltos exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				},
+				{
+					"name": "Mostrar producto por Id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvcnJlb0Bjb3JyZW8uY29tIiwibm9tYnJlIjoiRmFiaWFuIiwiaWQiOiI2NWUzOWQ4N2U0OTUyNDUzN2Q2ZjVjZmEiLCJpYXQiOjE3MDk1MTYwMDksImV4cCI6MTcwOTUxOTYwOX0.TMM93meyf-45QkBzrUQ2tfAtlHcIKtYVy5S1bffJcN8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:5000/productos/65e50f3ac3cf7d2381c9d809",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"productos",
+								"65e50f3ac3cf7d2381c9d809"
+							]
+						},
+						"description": "Permite mostrar un producto médico por su Id. Si el producto no existe devuelve un estado 404. Para hacer uso de este endpoint mediante código, deberás registrar el token de autenticación en el header _Authorization_ utilizando el tipo de autorización _Bearer_. Esto también lo puedes hacer mediante Postman desde la pestaña _Authorization_.\n\n**Códigos de estado de respuesta:**  \n200 - Datos devueltos exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n404 - Recurso no encontrado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar producto por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvcnJlb0Bjb3JyZW8uY29tIiwibm9tYnJlIjoiRmFiaWFuIiwiaWQiOiI2NWUzOWQ4N2U0OTUyNDUzN2Q2ZjVjZmEiLCJpYXQiOjE3MDk1MTYwMDksImV4cCI6MTcwOTUxOTYwOX0.TMM93meyf-45QkBzrUQ2tfAtlHcIKtYVy5S1bffJcN8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "nombre",
+									"value": "Fonendoscopio OIS 500 GMD",
+									"type": "text"
+								},
+								{
+									"key": "descripcion",
+									"value": "El Fonendoscopio OIS 500 GMD cuenta con tubos auriculares fabricados en cobre y campana en aleación de zinc, incorpora una manguera en forma de “A”, garantizando así una optima conductividad del sonido.",
+									"type": "text"
+								},
+								{
+									"key": "precio",
+									"value": "170000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:5000/productos/65e50f3ac3cf7d2381c9d809",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"productos",
+								"65e50f3ac3cf7d2381c9d809"
+							]
+						},
+						"description": "Permite actualizar los datos de un producto médico a través de su Id. Si el producto no existe devuelve un estado 404. Para hacer uso de este endpoint mediante código, deberás registrar el token de autenticación en el header _Authorization_ utilizando el tipo de autorización _Bearer_. Esto también lo puedes hacer mediante Postman desde la pestaña _Authorization_. La carga útil de la solicitud utiliza el tipo de cuerpo de x-www-form-urlencoded.\n\n**Códigos de estado de respuesta:**  \n200 - Datos devueltos exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n404 - Recurso no encontrado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar producto por Id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImNvcnJlb0Bjb3JyZW8uY29tIiwibm9tYnJlIjoiRmFiaWFuIiwiaWQiOiI2NWUzOWQ4N2U0OTUyNDUzN2Q2ZjVjZmEiLCJpYXQiOjE3MDk1NjMwMDIsImV4cCI6MTcwOTU2NjYwMn0.D3N9CpM-MektIv2s6snAS1-Sk_bXoZByXPY5GXcfAs0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "localhost:5000/productos/65e5dd23a647f85b9d242a9f",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"productos",
+								"65e5dd23a647f85b9d242a9f"
+							]
+						},
+						"description": "Permite eliminar un producto médico por su Id. Si el producto no existe devuelve un estado 404. Para hacer uso de este endpoint mediante código, deberás registrar el token de autenticación en el header _Authorization_ utilizando el tipo de autorización _Bearer_. Esto también lo puedes hacer mediante Postman desde la pestaña _Authorization_.\n\n**Códigos de estado de respuesta:**  \n200 - Datos devueltos exitosamente  \n400 - Bad request  \n401 - Usuario no autorizado  \n404 - Recurso no encontrado  \n500 - Error inesperado en el servidor"
+					},
+					"response": []
+				}
+			],
+			"description": "Este conjunto de endpoints administra los diferentes productos médicos que suministra la fundación como parte de sus servicios."
+		}
+	]
+}
