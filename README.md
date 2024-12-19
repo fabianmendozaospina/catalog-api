@@ -13,6 +13,15 @@ Project Catalog-API (Backend) repository developed with Node.js and Express.
 - Wait for the `backend` container to finish building and loading.
 - The API will be running on port 5000. 🚀
 
+## API Documentation
+
+Follow these steps to explore the documentation:
+
+- Via web: https://documenter.getpostman.com/view/16132451/2sA2xcaah6
+- Or locally:
+  - Import the `Catalogo-API.postman_collection.json` file located in the root of the project into `Postman`.
+  - Click the `...` button on the collection and choose the `View documentation` option.
+    
 ## Instalación en ASW
 Recomendaciones para el despliegue en ASW:
 
@@ -41,15 +50,6 @@ Configura grupos de seguridad en EC2 para controlar el tráfico de red.
 Utiliza AWS Identity and Access Management (IAM) para gestionar permisos y accesos.
 6. Monitoreo y escalado:
 Configura Amazon CloudWatch para monitorear tus instancias y utiliza Auto Scaling para escalar automáticamente tus recursos según la demanda.
-
-## Documentación de la API
-
-Sigue los siguientes pasos para explorar la documentación:
-
-- Vía web: https://documenter.getpostman.com/view/16132451/2sA2xcaah6
-- O localmente:
-  - Importa en `Postman` el archivo `Catalogo-API.postman_collection.json` que se encuentra en la raíz del proyecto.
-  - Haz clic en el botón `...` sobre la colección y elije la opción `View documentation`. 
 
 ## Justificación del Stack tecnológico
 
